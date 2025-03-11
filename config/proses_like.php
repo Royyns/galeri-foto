@@ -4,23 +4,24 @@ include 'koneksi.php';
 $fotoid = $_GET['fotoid'];
 $userid = $_SESSION['userid'];
 
+// Simpan halaman saat ini sebelum melakukan pengalihan
+$redirect_url = $_SERVER['HTTP_REFERER'];
+
 $ceksuka = mysqli_query($koneksi, "SELECT * FROM likefoto WHERE fotoid='$fotoid' AND userid='$userid'");
 if (mysqli_num_rows($ceksuka) == 1) {
     while($row = mysqli_fetch_array($ceksuka)){
-        $likeid = $row ['likeid'];
+        $likeid = $row['likeid'];
         $query = mysqli_query($koneksi, "DELETE FROM likefoto WHERE likeid='$likeid'");
         echo "<script>
-location.href='../admin/index.php';
-</script>"; 
+        location.href='$redirect_url';
+        </script>"; 
     }
-}else{
-
+} else {
     $tanggallike = date('Y-m-d');
     $query = mysqli_query($koneksi, "INSERT INTO likefoto VALUES('','$fotoid','$userid','$tanggallike')");
     
     echo "<script>
-    location.href='../admin/index.php';
+    location.href='$redirect_url';
     </script>";
 }
-
 ?>
