@@ -81,6 +81,60 @@ if ($_SESSION['status'] != 'login') {
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal for Comments -->
+                <div class="modal fade" id="komentar<?php echo $data['fotoid'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <img src="../assets/img/<?php echo $data['lokasifile'] ?>" class="card-img-top" title="<?php echo $data['judulfoto'] ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="m-2">
+                                            <div class="overflow-auto">
+                                                <div class="sticky-top">
+                                                    <strong><?php echo $data['judulfoto'] ?></strong><br>
+                                                    <span class="badge bg-secondary"><?php echo $data['namalengkap'] ?></span>
+                                                    <span class="badge bg-secondary"><?php echo $data['tanggalunggah'] ?></span>
+                                                    <span class="badge bg-primary"><?php echo $data['namaalbum'] ?></span>
+                                                </div>
+                                                <hr>
+                                                <p align="left">
+                                                    <?php echo $data['deskripsifoto'] ?>
+                                                </p>
+                                                <hr>
+                                                <?php 
+                                                $fotoid = $data['fotoid'];
+                                                $komentar = mysqli_query($koneksi, "SELECT * FROM komentarfoto INNER JOIN user ON komentarfoto.userid=user.userid WHERE komentarfoto.fotoid='$fotoid'");
+                                                while($row = mysqli_fetch_array($komentar)){
+                                                ?>
+                                                <p align="left">
+                                                    <strong><?php echo $row['namalengkap'] ?></strong>
+                                                    <?php echo $row['isikomentar'] ?>
+                                                </p>
+                                                <?php } ?>
+                                                <hr>
+                                                <div class="sticky-bottom">
+                                                    <form action="../config/proses_komentar.php" method="POST">
+                                                        <div class="input-group">
+                                                            <input type="hidden" name="fotoid" value="<?php echo $data['fotoid'] ?>">
+                                                            <input type="text" name="isikomentar" class="form-control" placeholder="Tambah Komentar">
+                                                            <div class="input-group-prepend">
+                                                                <button type="submit" name="kirimkomentar" class="btn btn-outline-primary">Kirim</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
             <?php } }else{
 
@@ -109,6 +163,60 @@ if ($_SESSION['status'] != 'login') {
                                 $jmlkomen = mysqli_query($koneksi, "SELECT * FROM komentarfoto WHERE fotoid='$fotoid'");
                                 echo mysqli_num_rows($jmlkomen).' Komentar';
                                 ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal for Comments -->
+                <div class="modal fade" id="komentar<?php echo $data['fotoid'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <img src="../assets/img/<?php echo $data['lokasifile'] ?>" class="card-img-top" title="<?php echo $data['judulfoto'] ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="m-2">
+                                            <div class="overflow-auto">
+                                                <div class="sticky-top">
+                                                    <strong><?php echo $data['judulfoto'] ?></strong><br>
+                                                    <span class="badge bg-secondary"><?php echo $data['namalengkap'] ?></span>
+                                                    <span class="badge bg-secondary"><?php echo $data['tanggalunggah'] ?></span>
+                                                    <span class="badge bg-primary"><?php echo $data['namaalbum'] ?></span>
+                                                </div>
+                                                <hr>
+                                                <p align="left">
+                                                    <?php echo $data['deskripsifoto'] ?>
+                                                </p>
+                                                <hr>
+                                                <?php 
+                                                $fotoid = $data['fotoid'];
+                                                $komentar = mysqli_query($koneksi, "SELECT * FROM komentarfoto INNER JOIN user ON komentarfoto.userid=user.userid WHERE komentarfoto.fotoid='$fotoid'");
+                                                while($row = mysqli_fetch_array($komentar)){
+                                                ?>
+                                                <p align="left">
+                                                    <strong><?php echo $row['namalengkap'] ?></strong>
+                                                    <?php echo $row['isikomentar'] ?>
+                                                </p>
+                                                <?php } ?>
+                                                <hr>
+                                                <div class="sticky-bottom">
+                                                    <form action="../config/proses_komentar.php" method="POST">
+                                                        <div class="input-group">
+                                                            <input type="hidden" name="fotoid" value="<?php echo $data['fotoid'] ?>">
+                                                            <input type="text" name="isikomentar" class="form-control" placeholder="Tambah Komentar">
+                                                            <div class="input-group-prepend">
+                                                                <button type="submit" name="kirimkomentar" class="btn btn-outline-primary">Kirim</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
