@@ -1,65 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="shortcut icon" type="img/jpg" href="assets/Icon.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Galeri Foto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        #navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 1rem;
+            background-color: var(--card-background-color);
+        }
+
+        #navbar.scrolled {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-sectionning-background-color);
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--card-background-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            text-align: center;
+            background-color: var(--card-background-color);
+        }
+    </style>
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">Galeri Foto</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse mt-2" id="navbarNavAltMarkup">
-                <div class="navbar-nav me-auto">
-
-                </div>
-                <a href="register.php" class="btn btn-outline-primary m-1">Daftar</a>
-                <a href="login.php" class="btn btn-outline-success m-1">Masuk</a>
-            </div>
-        </div>
+    <nav class="container-fluid" id="navbar">
+        <li><strong><a href="index.php"><i class="fa-solid fa-gallery-thumbnails"> Galeri Foto</i></a></strong></li>
+        <ul>
+            <li><a href="register.php" role="button"><i class="fas fa-user-plus"></i> Daftar</a></li>
+            <li><a href="login.php" role="button"><i class="fas fa-sign-in-alt"></i> Masuk</a></li>
+        </ul>
     </nav>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body bg-light">
-                        <div class="text-center">
-                            <h5>Login Aplikasi </h5>
-                        </div>
-                        <form action="config/aksi_login.php" method="post">
-                            <label class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" required>
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required>
-                            <div class="d-grid mt-2">
-                                <button class="btn btn-primary" type="submit" name="kirim">Masuk</button>
-                            </div>
-                        </form>
-                        <hr>
-                        <center>
-                            Belum Punya Akun? <p><a href="register.php">Daftar Disini!</a></p>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <main class="container">
+        <div class="login-container">
+            <h3 class="text-center">Login</h3>
+            <form action="config/aksi_login.php" method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
 
-    <footer class="d-flex justify-content-center border-top mt-3 bg-light fixed-bottom">
-        <p>&copy;2024 Projek Galeri Foto | Mukhammad Bagus Prastyo </p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+
+                <button type="submit" name="kirim" class="contrast">Masuk</button>
+            </form>
+            <p class="text-center">Belum punya akun? <a href="register.php">Daftar sekarang</a></p>
+        </div>
+    </main>
+
+    <footer class="container-fluid">
+        <small>&copy;2024 Projek Galeri Foto | Mukhammad Bagus Prastyo</small>
     </footer>
 
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
+    <script>
+        window.addEventListener("scroll", function() {
+            const navbar = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+    </script>
 </body>
 
 </html>
